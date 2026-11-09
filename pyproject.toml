@@ -9,12 +9,12 @@ description = "Production-like e-commerce retrieval and recommendation portfolio
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
 dependencies = [
-    "pyspark>=4.2,<4.3",
+    "pyspark==4.2.0",
 ]
 
 [project.optional-dependencies]
 dev = [
-    "pytest>=9.1,<10",
+    "pytest==9.1.1",
 ]
 
 [tool.setuptools.packages.find]

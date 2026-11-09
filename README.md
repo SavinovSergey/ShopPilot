@@ -1,5 +1,7 @@
 # ShopPilot
 
+[![CI](https://github.com/SavinovSergey/ShopPilot/actions/workflows/ci.yml/badge.svg)](https://github.com/SavinovSergey/ShopPilot/actions/workflows/ci.yml)
+
 ShopPilot — production-like portfolio project AI Engineer для e-commerce: batch
 data platform, рекомендации, hybrid retrieval, reranking и grounded
 AI-консультант. Первый датасет — Amazon Reviews 2023 `All_Beauty`.
