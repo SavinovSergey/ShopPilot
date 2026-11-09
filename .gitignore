@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local environments and secrets
+.venv/
+.env
+.env.*
+!.env.example
+
+# Spark runtime state
+derby.log
+metastore_db/
+spark-warehouse/
+*.crc
+
+# Local datasets and generated lake outputs
+data/*
+!data/.gitkeep
+
+# IDE and OS files
+.idea/
+.vscode/
+.DS_Store
+
+# Codex local task metadata
+.agents/
+.codex/
+
+# Standalone training scratchpad (not part of ShopPilot runtime)
+spark_practise/
+
+# Local learning history; the public repository contains only product code
+day[0-9][0-9]/
+docs/day[0-9][0-9]-*.md
+docs/learning-plan.md
