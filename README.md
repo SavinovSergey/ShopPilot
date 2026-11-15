@@ -13,15 +13,20 @@ AI-консультант. Первый датасет — Amazon Reviews 2023 `
   `global_calendar_v1`.
 - Реализованы point-in-time user features, cold/warm evaluation slices,
   quality gates и null-sensitive rerun signatures.
-- Следующий этап — popularity, item-to-item и implicit ALS baselines с честной
-  offline evaluation.
+- Опубликован versioned model-input snapshot для validation cutoff: train-only
+  пары, collision-free user/item mappings, candidate universe, seen items и
+  popularity counts. Leakage и mapping gates равны нулю, два полных запуска
+  дали одинаковые signatures.
+- Публичный набор из 67 тестов проверяет data pipeline и model inputs.
+- Следующий этап — recommender evaluation harness и popularity baseline.
 
 ## Структура
 
 ```text
 src/shoppilot/       канонический код продукта
   data/              schemas, transforms, contracts и quality gates
-  jobs/              исполняемые Spark jobs
+  recommendations/   model inputs, mappings, signatures и leakage gates
+  jobs/              исполняемые Spark jobs и публикация артефактов
 tests/               тесты актуального pipeline
 docs/                product design, data contract и architecture notes
 data/                локальные source/lake artifacts, не хранятся в Git
@@ -43,7 +48,12 @@ python3.12 -m venv .venv
 .venv/bin/python -m shoppilot.jobs.silver
 .venv/bin/python -m shoppilot.jobs.gold
 .venv/bin/python -m shoppilot.tools.performance_audit
+.venv/bin/python -m shoppilot.jobs.recommender_model_input
 ```
+
+Последняя команда читает versioned Gold snapshot и публикует model-input
+артефакты для validation cutoff `2021-01-01`. Повторный запуск сравнивает
+сохранённые и заново рассчитанные signatures до перезаписи.
 
 Данные, виртуальное окружение, Spark metastore и сгенерированные Parquet-файлы
 намеренно исключены из Git. В репозиторий входят код, тесты, документация и
